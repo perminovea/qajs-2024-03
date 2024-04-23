@@ -37,4 +37,5 @@ jobs:
           node-version: 20.11.0
           cache: 'npm'
       - run: npm ci
+      - run: echo ${{ vars.FILE_ENV }} >> .env
       - run: npm test

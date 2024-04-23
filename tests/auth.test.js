@@ -1,27 +1,33 @@
+const config = {
+  baseUrl: process.env.TEST_DUMMYJSON_BASE_API_URL,
+  username: process.env.TEST_DUMMYJSON_USERNAME,
+  password: process.env.TEST_DUMMYJSON_PASSWORD,
+}
+
 describe('Auth', () => {
   it('Success login', async () => {
-    const response = await fetch('https://dummyjson.com/auth/login', {
+    const response = await fetch(`${config.baseUrl}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        username: 'kminchelle',
-        password: '0lelplR',
+        username: config.username,
+        password: config.password,
         expiresInMins: 30,
       }),
     })
     const data = await response.json()
 
     expect(response.status).toEqual(200)
-    expect(data.username).toBe('kminchelle')
+    expect(data.username).toBe(config.username)
     expect(data.token).toBeTruthy()
   })
 
   it('Failed login', async () => {
-    const response = await fetch('https://dummyjson.com/auth/login', {
+    const response = await fetch(`${config.baseUrl}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        username: 'kminchelle',
+        username: config.username,
         password: 'wrongpassword',
         expiresInMins: 30,
       }),
