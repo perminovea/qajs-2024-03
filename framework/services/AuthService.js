@@ -30,10 +30,11 @@ const authorized = async ({ userName, password }) => {
 }
 
 const generateTokenCached = cached(generateToken)
-const getTokenFromCache = async () => {
+
+const getTokenFromCache = async ({ userName, password }) => {
   const response = await generateTokenCached({
-    userName: config.username,
-    password: config.password,
+    userName,
+    password,
   })
   if (typeof response.data.token !== 'string') {
     throw new Error('No token in response')
