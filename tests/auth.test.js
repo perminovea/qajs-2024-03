@@ -1,23 +1,24 @@
 import { config as _config } from '../framework'
+import axios from 'axios'
 
 const config = _config.dummyjson
 
 describe('Auth', () => {
   it('Success login', async () => {
-    const response = await fetch(`${config.baseURL}/auth/login`, {
+    const response = await axios.post(config.baseURL, {
       method: 'POST',
+      userName: config.username,
       headers: { 'Content-Type': 'application/json' },
+      password: config.password,
       body: JSON.stringify({
-        username: config.username,
+        userName: config.username,
         password: config.password,
-        expiresInMins: 30,
       }),
     })
-    const data = await response.json()
 
     expect(response.status).toEqual(200)
-    expect(data.username).toBe(config.username)
-    expect(data.token).toBeTruthy()
+    expect(response.data.username).toBe(config.username)
+    expect(response.data.token).toBeTruthy()
   })
 
   it('Failed login', async () => {
