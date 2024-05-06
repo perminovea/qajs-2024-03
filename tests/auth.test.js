@@ -1,24 +1,19 @@
 import { config as _config } from '../framework'
-import axios from 'axios'
+import supertest from 'supertest'
 
 const config = _config.dummyjson
 
 describe('Auth', () => {
   it('Success login', async () => {
-    const response = await axios.post(config.baseURL, {
-      method: 'POST',
-      userName: config.username,
-      headers: { 'Content-Type': 'application/json' },
+    const response = await supertest(config.baseURL).post('/auth/login').send({
+      username: config.username,
       password: config.password,
-      body: JSON.stringify({
-        userName: config.username,
-        password: config.password,
-      }),
+      expiresInMins: 30,
     })
 
     expect(response.status).toEqual(200)
-    expect(response.data.username).toBe(config.username)
-    expect(response.data.token).toBeTruthy()
+    expect(response.body.username).toBe(config.username)
+    expect(response.body.token).toBeTruthy()
   })
 
   it('Failed login', async () => {
