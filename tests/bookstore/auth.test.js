@@ -1,12 +1,19 @@
 import config from '../../framework/config/configBookstore'
 import { AuthService } from '../../framework'
+import { addMsg } from 'jest-html-reporters/helper'
 
 describe('Авторизация', () => {
   it('Успешная авторизация', async () => {
-    const response = await AuthService.generateTokenCached({
-      userName: config.username,
+    const credentials = {
+      userName: config.username + 'broken',
       password: config.password,
+    }
+
+    addMsg({
+      message: `Юзер: ${JSON.stringify(credentials, null, 2)}`,
     })
+
+    const response = await AuthService.generateTokenCached(credentials)
     expect(response.status).toBe(200)
     expect(response.data).toMatchObject({
       result: 'User authorized successfully.',
