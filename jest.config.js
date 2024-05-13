@@ -197,7 +197,9 @@ const config = {
       filename: 'index.html',
       openReport: !process.env.CI
     }]
-  ]
+  ],
+
+  testEnvironment: 'allure-jest/node'
 }
 
 module.exports = config
