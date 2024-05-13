@@ -5,7 +5,7 @@ import { addMsg } from 'jest-html-reporters/helper'
 describe('Авторизация', () => {
   it('Успешная авторизация', async () => {
     const credentials = {
-      userName: config.username + 'broken',
+      userName: config.username,
       password: config.password,
     }
     await addMsg({ message: `Доступы: ${JSON.stringify(credentials, null, 2)}` })
