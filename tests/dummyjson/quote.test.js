@@ -40,7 +40,7 @@ describe('Quote', () => {
     const response1 = await QuoteService.getRandom()
     expect(response1.status).toBe(200)
     const isValid1 = quoteValidate(response1.data)
-    expect(quoteValidate.errors).toStrictEqual(null)
+    expect(quoteValidate.errors).toBe(null)
     expect(isValid1).toBe(true)
 
     const response2 = await QuoteService.getRandom()
