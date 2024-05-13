@@ -13,7 +13,10 @@
     "codestyle": "run-s lint format",
     "build": "babel src --out-dir build --source-maps inline",
     "test": "jest --verbose --runInBand --setupFiles dotenv/config",
-    "coverage": "jest --coverage --runInBand"
+    "coverage": "jest --coverage --runInBand",
+    "allure": "allure serve allure-results",
+    "allure:ci": "allure generate allure-results --clean",
+    "allure:ci:show": "allure open allure-report"
   },
   "author": "Damir Rysaev <freepad@ya.ru>",
   "keywords": [],
@@ -26,6 +29,8 @@
     "@faker-js/faker": "^8.4.1",
     "@jest/types": "^29.6.3",
     "@types/jest": "^29.5.12",
+    "allure-commandline": "^2.29.0",
+    "allure-jest": "^2.15.1",
     "@types/jest-json-schema": "^6.1.4",
     "axios": "^1.6.8",
     "dotenv": "^16.4.5",
