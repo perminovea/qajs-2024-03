@@ -13,4 +13,5 @@ test:
   image: node:20.12.0
   script:
     - npm ci
+    - cp $ENV_FILE .env
     - npm test
