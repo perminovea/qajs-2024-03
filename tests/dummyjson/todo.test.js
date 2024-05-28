@@ -10,17 +10,17 @@ const todoSchema = {
       type: 'number',
     },
     completed: {
-      type: 'boolean'
+      type: 'boolean',
     },
     todo: {
-      type: 'string'
+      type: 'string',
     },
     userId: {
-      type: 'number'
-    }
+      type: 'number',
+    },
   },
   required: ['id', 'completed', 'todo', 'userId'],
-  additionalProperties: false
+  additionalProperties: false,
 }
 
 // eslint-disable-next-line jest/no-disabled-tests
