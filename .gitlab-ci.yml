@@ -1,17 +1,31 @@
 stages:
+  - prepare
   - test
+
+variables:
+  IMAGE_BASE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+
+build_image:
+  image: docker:20.10.16
+  stage: prepare
+  services:
+    - docker:20.10.16-dind
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - docker build -t $CI_REGISTRY_IMAGE:latest -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG .
+    - docker push $CI_REGISTRY_IMAGE:latest
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
 
 lint:
   stage: test
-  image: node:20.12.0
+  image: $IMAGE_BASE
   script:
-    - npm ci
     - npm run codestyle:ci
 
 test:
   stage: test
-  image: node:20.12.0
+  image: $IMAGE_BASE
   script:
-    - npm ci
     - cp $ENV_FILE .env
     - npm test
