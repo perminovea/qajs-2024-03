@@ -22,13 +22,13 @@ lint:
   image: $IMAGE_BASE
   script:
     - echo $PWD
-    - cd app
+    - cd /app
     - npm run codestyle:ci
 
 test:
   stage: test
   image: $IMAGE_BASE
   script:
-    - cd app
+    - cd /app
     - cp $ENV_FILE .env
     - npm test
