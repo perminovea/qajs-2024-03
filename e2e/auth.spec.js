@@ -1,29 +1,29 @@
 // @ts-check
 import { test, expect } from '@playwright/test'
 import { faker } from '@faker-js/faker'
+import { AuthPage } from '../framework/pages/AuthPage'
+import { LoginPage } from '../framework/pages/LoginPage'
 
 test('Создание нового юзера', async ({ page }) => {
-  await page.goto('https://rwa-194.87.102.103.sslip.io/register')
-  await page.getByTestId('input-username').click()
-  await page.getByTestId('input-username').fill(faker.person.fullName())
-  await page.getByTestId('input-email').click()
-  await page.getByTestId('input-email').fill(faker.internet.email())
-  await page.getByTestId('input-email').press('Tab')
-  await page.getByTestId('input-password').fill('re@l_passw0rd')
-  await page.getByTestId('btn-submit').click()
+  const authPage = AuthPage({ page })
+
+  await authPage.reg({
+    username: faker.person.fullName(),
+    email: faker.internet.email(),
+    password: 'E5dPkCf7bPTnfn6q',
+  })
 
   await expect(page.getByText('No articles are here... yet.')).toBeVisible()
 })
 
 test('Успешная авторизация', async ({ page }) => {
-  await page.goto('https://rwa-194.87.102.103.sslip.io/login')
+  const loginPage = LoginPage({ page })
 
-  await page.getByTestId('input-email').click()
-  await page.getByTestId('input-email').fill('root@mail.net')
+  await loginPage.login({
+    email: 'root@mail.net',
+    password: 'E5dPkCf7bPTnfn6q',
+  })
 
-  await page.getByTestId('input-password').click()
-  await page.getByTestId('input-password').fill('E5dPkCf7bPTnfn6q')
-  await page.getByTestId('btn-submit').click()
   await page.getByText('A place to share your').click()
   await expect(page.getByText('A place to share your')).toBeVisible()
   await expect(
@@ -32,16 +32,13 @@ test('Успешная авторизация', async ({ page }) => {
 })
 
 test('Неуспешная регистрация с уже существующим email', async ({ page }) => {
-  await page.goto('https://rwa-194.87.102.103.sslip.io/register')
+  const authPage = AuthPage({ page })
 
-  await page.getByTestId('input-username').click()
-  await page.getByTestId('input-username').fill(faker.person.fullName())
+  await authPage.visit()
 
-  await page.getByTestId('input-email').click()
-  await page.getByTestId('input-email').fill('root@mail.net')
-
-  await page.getByTestId('input-password').click()
-  await page.getByTestId('input-password').fill('some_password')
+  await authPage.fillUsername(faker.person.fullName())
+  await authPage.fillEmail('root@mail.net')
+  await authPage.fillPassword('some_password')
 
   await page.getByTestId('btn-submit').click()
 
@@ -49,13 +46,12 @@ test('Неуспешная регистрация с уже существующ
 })
 
 test('Неуспешная авторизация с неверным паролем', async ({ page }) => {
-  await page.goto('https://rwa-194.87.102.103.sslip.io/login')
+  const loginPage = LoginPage({ page })
 
-  await page.getByTestId('input-email').click()
-  await page.getByTestId('input-email').fill('root@mail.net')
+  await loginPage.visit()
 
-  await page.getByTestId('input-password').click()
-  await page.getByTestId('input-password').fill('wrong_password')
+  await loginPage.fillEmail('root@mail.net')
+  await loginPage.fillPassword('wrong_password')
 
   await page.getByTestId('btn-submit').click()
 
@@ -64,9 +60,10 @@ test('Неуспешная авторизация с неверным парол
 })
 
 test('Неуспешная регистрация с пустыми полями', async ({ page }) => {
-  await page.goto('https://rwa-194.87.102.103.sslip.io/register')
+  const authPage = AuthPage({ page })
 
-  await page.getByTestId('btn-submit').click()
+  await authPage.visit()
+  await authPage.submitForm()
 
   await expect(page.getByText('Invalid email')).toBeVisible()
   await expect(page.getByText('Password is too short')).toBeVisible()
@@ -75,13 +72,12 @@ test('Неуспешная регистрация с пустыми полями
 test('Неуспешная авторизация с незарегистрированным email', async ({
   page,
 }) => {
-  await page.goto('https://rwa-194.87.102.103.sslip.io/login')
+  const loginPage = LoginPage({ page })
 
-  await page.getByTestId('input-email').click()
-  await page.getByTestId('input-email').fill(faker.internet.email())
+  await loginPage.visit()
 
-  await page.getByTestId('input-password').click()
-  await page.getByTestId('input-password').fill('some_password')
+  await loginPage.fillEmail('wrong-email@mail.com')
+  await loginPage.fillPassword('some_password')
 
   await page.getByTestId('btn-submit').click()
 
