@@ -5,7 +5,7 @@ import { AuthPage } from '../framework/pages/AuthPage'
 import { LoginPage } from '../framework/pages/LoginPage'
 
 test('Создание нового юзера', async ({ page }) => {
-  const authPage = AuthPage({ page })
+  const authPage = new AuthPage({ page })
 
   await authPage.reg({
     username: faker.person.fullName(),
@@ -17,7 +17,7 @@ test('Создание нового юзера', async ({ page }) => {
 })
 
 test('Успешная авторизация', async ({ page }) => {
-  const loginPage = LoginPage({ page })
+  const loginPage = new LoginPage({ page })
 
   await loginPage.login({
     email: 'root@mail.net',
@@ -32,7 +32,7 @@ test('Успешная авторизация', async ({ page }) => {
 })
 
 test('Неуспешная регистрация с уже существующим email', async ({ page }) => {
-  const authPage = AuthPage({ page })
+  const authPage = new AuthPage({ page })
 
   await authPage.visit()
 
@@ -46,7 +46,7 @@ test('Неуспешная регистрация с уже существующ
 })
 
 test('Неуспешная авторизация с неверным паролем', async ({ page }) => {
-  const loginPage = LoginPage({ page })
+  const loginPage = new LoginPage({ page })
 
   await loginPage.visit()
 
@@ -60,7 +60,7 @@ test('Неуспешная авторизация с неверным парол
 })
 
 test('Неуспешная регистрация с пустыми полями', async ({ page }) => {
-  const authPage = AuthPage({ page })
+  const authPage = new AuthPage({ page })
 
   await authPage.visit()
   await authPage.submitForm()
@@ -72,7 +72,7 @@ test('Неуспешная регистрация с пустыми полями
 test('Неуспешная авторизация с незарегистрированным email', async ({
   page,
 }) => {
-  const loginPage = LoginPage({ page })
+  const loginPage = new LoginPage({ page })
 
   await loginPage.visit()
 

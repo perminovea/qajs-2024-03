@@ -1,36 +1,31 @@
 // @ts-check
 import { expect } from '@playwright/test'
+import { BasicPage } from './BasicPage'
 
-export function LoginPage({ page }) {
-  const visit = async () => {
-    await page.goto('/login')
-    await expect(page.locator('h1')).toHaveText('Sign in')
+export class LoginPage extends BasicPage {
+  url = '/register'
+
+  async visit () {
+    await super.visit()
+    await expect(this.page.locator('h1')).toHaveText('Sign in')
   }
 
-  const fillEmail = async email => {
-    await page.getByTestId('input-email').fill(email)
+  async fillEmail (email) {
+    await this.page.getByTestId('input-email').fill(email)
   }
 
-  const fillPassword = async password => {
-    await page.getByTestId('input-password').fill(password)
+  async fillPassword (password) {
+    await this.page.getByTestId('input-password').fill(password)
   }
 
-  const submitForm = async () => {
-    await page.getByTestId('btn-submit').click()
+  async submitForm () {
+    await this.page.getByTestId('btn-submit').click()
   }
 
-  const login = async ({ email, password }) => {
-    await visit()
-    await fillEmail(email)
-    await fillPassword(password)
-    await submitForm()
-  }
-
-  return {
-    visit,
-    fillPassword,
-    fillEmail,
-    submitForm,
-    login,
+  async login ({ email, password }){
+    await this.visit()
+    await this.fillEmail(email)
+    await this.fillPassword(password)
+    await this.submitForm()
   }
 }
