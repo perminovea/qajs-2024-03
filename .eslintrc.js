@@ -4,6 +4,9 @@ module.exports = {
     node: true,
     'jest/globals': true,
   },
+  globals: {
+    cy: true
+  },
   extends: ['standard', 'prettier'],
   overrides: [
     {
@@ -23,6 +26,15 @@ module.exports = {
         jest: true,
       },
     },
+    {
+      files: ['cypress/**/*.js'],
+      plugins: ['cypress'],
+      extends: ['plugin:cypress/recommended'],
+      rules: {
+        'cypress/no-unnecessary-waiting': 'off', // 'warn',
+        'no-unused-expressions': 'off' // 'warn'
+      }
+    }
   ],
   parserOptions: {
     ecmaVersion: 'latest',
