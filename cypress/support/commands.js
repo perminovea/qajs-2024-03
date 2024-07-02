@@ -25,3 +25,24 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 import '@testing-library/cypress/add-commands'
+
+// cy.login('...', '...')
+Cypress.Commands.add('login', (email, password) => {
+  cy.visit('https://rwa-194.87.102.103.sslip.io/login')
+
+  cy.get('[data-testid="input-email"]')
+    .type(email)
+
+  cy.get('[data-testid="input-password"]')
+    .type(password)
+
+  cy.get('button').contains('Sign in').click()
+
+  cy.get('.banner').contains('A place to share your knowledge.')
+})
+
+// Cypress.on('uncaught:exception', (err, runnable) => {
+//   // returning false here prevents Cypress from
+//   // failing the test
+//   return false
+// })
