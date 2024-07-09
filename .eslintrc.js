@@ -1,44 +1,96 @@
 module.exports = {
+  root: true,
   env: {
-    es2021: true,
+    es6: true,
+    jest: true,
     node: true,
-    'jest/globals': true,
   },
-  globals: {
-    cy: true
-  },
-  extends: ['standard', 'prettier'],
-  overrides: [
-    {
-      env: {
-        node: true,
-      },
-      files: ['.eslintrc.{js,cjs}'],
-      parserOptions: {
-        sourceType: 'script',
-      },
-    },
-    {
-      files: ['tests/**/*.test.js'],
-      plugins: ['jest'],
-      extends: ['plugin:jest/recommended'],
-      env: {
-        jest: true,
-      },
-    },
-    {
-      files: ['cypress/**/*.js'],
-      plugins: ['cypress'],
-      extends: ['plugin:cypress/recommended'],
-      rules: {
-        'cypress/no-unnecessary-waiting': 'off', // 'warn',
-        'no-unused-expressions': 'off' // 'warn'
-      }
-    }
+  extends: [
+    'plugin:playwright/playwright-test',
   ],
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly',
+  },
+  plugins: [
+    'playwright',
+  ],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
+    project: './tsconfig.json',
   },
-  rules: {},
-}
+  rules: {
+    'no-loop-func': 'off',
+    'no-shadow': 'off',
+    'no-await-in-loop': ['off'],
+    'no-restricted-syntax': ['error', 'ForInStatement', 'LabeledStatement', 'WithStatement'],
+    'import/no-duplicate': ['off'],
+
+    'padding-line-between-statements': [
+      'error',
+      { blankLine: 'always', prev: '*', next: 'block' },
+      { blankLine: 'always', prev: 'block', next: '*' },
+      { blankLine: 'always', prev: '*', next: 'block-like' },
+      { blankLine: 'always', prev: 'block-like', next: '*' },
+    ],
+    'no-mixed-operators': ['off'],
+    '@typescript-eslint/no-unused-vars': ['warn'],
+    'no-unused-vars': ['warn'],
+    'no-restricted-globals': ['off'],
+    'no-undef': ['off'],
+    'consistent-return': ['off'],
+    'no-plusplus': ['off'],
+    'no-continue': ['off'],
+    'no-empty-function': ['off'],
+    'class-methods-use-this': ['off'],
+    'func-names': ['off'],
+    'no-useless-constructor': ['off'],
+    'implicit-arrow-linebreak': 'off',
+    'max-classes-per-file': ['off'],
+    'no-underscore-dangle': ['off'],
+    'no-param-reassign': ['off'],
+    'max-len': ['error', { code: 120 }],
+    'no-console': ['warn'],
+    'comma-dangle': [
+      'error',
+      {
+        arrays: 'always-multiline',
+        objects: 'always-multiline',
+        imports: 'always-multiline',
+        exports: 'always-multiline',
+        functions: 'never',
+      },
+    ],
+    'sort-imports': ['off'],
+    'import-helpers/order-imports': [
+      'error',
+      {
+        newlinesBetween: 'always',
+        groups: [
+          'absolute',
+          'module',
+          'parent',
+          'sibling',
+        ],
+        alphabetize: {
+          order: 'asc',
+          ignoreCase: true,
+        },
+      },
+    ],
+    'import/no-unresolved': ['off'],
+    'import/prefer-default-export': ['off'],
+    'import/no-named-as-default': ['off'],
+    'import/no-extraneous-dependencies': ['off'],
+    'import/extensions': ['off'],
+    'import/no-cycle': ['warn'],
+    'import/no-duplicates': 'error',
+    '@typescript-eslint/ban-ts-comment': [
+      'error',
+      {'ts-ignore': 'allow-with-description'},
+    ],
+  },
+
+};

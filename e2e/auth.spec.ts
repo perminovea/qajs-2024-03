@@ -1,10 +1,10 @@
 // @ts-check
-import { test, expect } from '@playwright/test'
+import { test, expect, Page } from 'playwright/test'
 import { faker } from '@faker-js/faker'
 import { AuthPage } from '../framework/pages/AuthPage'
 import { LoginPage } from '../framework/pages/LoginPage'
 
-test('Создание нового юзера', async ({ page }) => {
+test('Создание нового юзера', async (page) => {
   const authPage = new AuthPage({ page })
 
   await authPage.reg({
@@ -16,7 +16,7 @@ test('Создание нового юзера', async ({ page }) => {
   await expect(page.getByText('No articles are here... yet.')).toBeVisible()
 })
 
-test('Успешная авторизация', async ({ page }) => {
+test('Успешная авторизация', async ({page}) => {
   const loginPage = new LoginPage({ page })
 
   await loginPage.login({
@@ -31,7 +31,7 @@ test('Успешная авторизация', async ({ page }) => {
   ).toBeVisible()
 })
 
-test('Неуспешная регистрация с уже существующим email', async ({ page }) => {
+test('Неуспешная регистрация с уже существующим email', async ({page}) => {
   const authPage = new AuthPage({ page })
 
   await authPage.visit()
@@ -45,7 +45,7 @@ test('Неуспешная регистрация с уже существующ
   await expect(page.getByText('Register fail')).toBeVisible()
 })
 
-test('Неуспешная авторизация с неверным паролем', async ({ page }) => {
+test('Неуспешная авторизация с неверным паролем', async (page: Page) => {
   const loginPage = new LoginPage({ page })
 
   await loginPage.visit()
@@ -59,7 +59,7 @@ test('Неуспешная авторизация с неверным парол
   await expect(page.getByText('This page could not be found.')).toBeVisible()
 })
 
-test('Неуспешная регистрация с пустыми полями', async ({ page }) => {
+test('Неуспешная регистрация с пустыми полями', async (page: Page) => {
   const authPage = new AuthPage({ page })
 
   await authPage.visit()
@@ -69,9 +69,7 @@ test('Неуспешная регистрация с пустыми полями
   await expect(page.getByText('Password is too short')).toBeVisible()
 })
 
-test('Неуспешная авторизация с незарегистрированным email', async ({
-  page,
-}) => {
+test('Неуспешная авторизация с незарегистрированным email', async (page) => {
   const loginPage = new LoginPage({ page })
 
   await loginPage.visit()

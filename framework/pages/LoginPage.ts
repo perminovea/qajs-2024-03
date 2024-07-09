@@ -2,6 +2,11 @@
 import { expect } from '@playwright/test'
 import { BasicPage } from './BasicPage'
 
+type userCredentials = {
+  email: string,
+  password: string
+}
+
 export class LoginPage extends BasicPage {
   url = '/register'
 
@@ -10,11 +15,11 @@ export class LoginPage extends BasicPage {
     await expect(this.page.locator('h1')).toHaveText('Sign in')
   }
 
-  async fillEmail (email) {
+  async fillEmail (email: string) {
     await this.page.getByTestId('input-email').fill(email)
   }
 
-  async fillPassword (password) {
+  async fillPassword (password: string) {
     await this.page.getByTestId('input-password').fill(password)
   }
 
@@ -22,7 +27,7 @@ export class LoginPage extends BasicPage {
     await this.page.getByTestId('btn-submit').click()
   }
 
-  async login ({ email, password }){
+  async login ({ email, password } : userCredentials){
     await this.visit()
     await this.fillEmail(email)
     await this.fillPassword(password)

@@ -1,4 +1,5 @@
 export class BasicPage {
+  // @ts-ignore
   constructor({ page }) {
     this.page = page;
   }
