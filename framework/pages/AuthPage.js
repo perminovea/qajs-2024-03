@@ -14,32 +14,32 @@ export class AuthPage extends BasicPage {
     this.btnSubmit = page.getByTestId('btn-submit')
   }
 
-  async visit () {
+  async visit() {
     await super.visit()
     await expect(this.page.locator('h1')).toHaveText('Sign up')
   }
 
-  async fillUsername (username) {
+  async fillUsername(username) {
     await this.fieldUsername.fill(username)
   }
 
-  async fillEmail (email) {
+  async fillEmail(email) {
     await this.fieldEmail.fill(email)
   }
 
-  async fillPassword (password) {
+  async fillPassword(password) {
     await this.fieldPassword.fill(password)
   }
 
-  async submitForm () {
+  async submitForm() {
     await this.btnSubmit.click()
   }
 
-  async reg ({ username, email, password }) {
-      await this.visit()
-      await this.fillUsername(username)
-      await this.fillEmail(email)
-      await this.fillPassword(password)
-      await this.submitForm()
+  async reg({ username, email, password }) {
+    await this.visit()
+    await this.fillUsername(username)
+    await this.fillEmail(email)
+    await this.fillPassword(password)
+    await this.submitForm()
   }
 }

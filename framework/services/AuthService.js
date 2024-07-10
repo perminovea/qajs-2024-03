@@ -2,7 +2,7 @@ import config from '../config/configBookstore'
 import { cached } from '../utils/cache'
 
 class AuthService {
-  static async generateToken  ({ userName, password }) {
+  static async generateToken({ userName, password }) {
     const response = await fetch(`${config.baseURL}/Account/v1/GenerateToken`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -16,7 +16,7 @@ class AuthService {
     }
   }
 
-  static async authorized ({ userName, password }) {
+  static async authorized({ userName, password }) {
     // this....
     const response = await fetch(`${config.baseURL}/Account/v1/Authorized`, {
       method: 'POST',
@@ -31,7 +31,7 @@ class AuthService {
     }
   }
 
-  static generateTokenCached () {
+  static generateTokenCached() {
     return cached(AuthService.generateToken)
   }
 

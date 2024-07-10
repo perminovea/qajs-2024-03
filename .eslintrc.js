@@ -5,7 +5,7 @@ module.exports = {
     'jest/globals': true,
   },
   globals: {
-    cy: true
+    cy: true,
   },
   extends: ['standard', 'prettier'],
   overrides: [
@@ -32,9 +32,9 @@ module.exports = {
       extends: ['plugin:cypress/recommended'],
       rules: {
         'cypress/no-unnecessary-waiting': 'off', // 'warn',
-        'no-unused-expressions': 'off' // 'warn'
-      }
-    }
+        'no-unused-expressions': 'off', // 'warn'
+      },
+    },
   ],
   parserOptions: {
     ecmaVersion: 'latest',

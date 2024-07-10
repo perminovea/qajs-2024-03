@@ -30,11 +30,9 @@ import '@testing-library/cypress/add-commands'
 Cypress.Commands.add('login', (email, password) => {
   cy.visit('https://rwa-194.87.102.103.sslip.io/login')
 
-  cy.get('[data-testid="input-email"]')
-    .type(email)
+  cy.get('[data-testid="input-email"]').type(email)
 
-  cy.get('[data-testid="input-password"]')
-    .type(password)
+  cy.get('[data-testid="input-password"]').type(password)
 
   cy.get('button').contains('Sign in').click()
 

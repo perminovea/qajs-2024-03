@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 import { faker } from '@faker-js/faker'
 
-describe('Article',() => {
+describe('Article', () => {
   beforeEach(() => {
     cy.login('root@mail.net', 'E5dPkCf7bPTnfn6q')
   })
@@ -13,13 +13,14 @@ describe('Article',() => {
 
     const message = faker.lorem.words({
       min: 2,
-      max: 10
+      max: 10,
     })
 
-    cy.intercept('POST','/api/articles/post-for-test-edit/comments').as('sendComment')
+    cy.intercept('POST', '/api/articles/post-for-test-edit/comments').as(
+      'sendComment',
+    )
 
-    cy.get('[placeholder="Write a comment..."]')
-      .type(message)
+    cy.get('[placeholder="Write a comment..."]').type(message)
 
     cy.get('button').contains('Post Comment').click()
 
@@ -57,18 +58,17 @@ describe('Article',() => {
 
     const message = faker.lorem.words({
       min: 2,
-      max: 10
+      max: 10,
     })
 
-    cy.intercept('POST','/api/articles/post-for-test-edit/comments', {
+    cy.intercept('POST', '/api/articles/post-for-test-edit/comments', {
       statusCode: 500,
       body: {
-        error: 'Invalid error'
-      }
+        error: 'Invalid error',
+      },
     }).as('sendComment')
 
-    cy.get('[placeholder="Write a comment..."]')
-      .type(message)
+    cy.get('[placeholder="Write a comment..."]').type(message)
 
     cy.get('button').contains('Post Comment').click()
 

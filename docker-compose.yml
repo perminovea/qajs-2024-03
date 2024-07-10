@@ -8,9 +8,9 @@ services:
       - postgres:/var/lib/postgresql/data
       - ${PWD}/backup/postgres:/var/lib/postgresql/dump:delegated
     environment:
-      POSTGRES_USER: otus
+      POSTGRES_USER: demo
       POSTGRES_PASSWORD: secret
-      POSTGRES_DB: airports
+      POSTGRES_DB: demo
 
 volumes:
   postgres:

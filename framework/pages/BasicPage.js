@@ -1,9 +1,9 @@
 export class BasicPage {
   constructor({ page }) {
-    this.page = page;
+    this.page = page
   }
 
-  async visit () {
+  async visit() {
     await this.page.goto(this.url)
   }
 }
