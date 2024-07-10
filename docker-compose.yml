@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    ports:
+      - 65432:5432
+    volumes:
+      - postgres:/var/lib/postgresql/data
+      - ${PWD}/backup/postgres:/var/lib/postgresql/dump:delegated
+    environment:
+      POSTGRES_USER: otus
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: airports
+
+volumes:
+  postgres:
