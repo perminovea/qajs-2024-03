@@ -99,4 +99,5 @@ npm run allure:ci:show
 ```
 
 ### Ссылки:
+
 [Allure Jest configuration](https://allurereport.org/docs/jest-configuration/)
