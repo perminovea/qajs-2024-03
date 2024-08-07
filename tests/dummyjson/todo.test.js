@@ -3,26 +3,6 @@ import { TodoSchema, TodoService } from '../../framework'
 
 const ajv = new Ajv()
 
-const todoSchema = {
-  type: 'object',
-  properties: {
-    id: {
-      type: 'number',
-    },
-    completed: {
-      type: 'boolean'
-    },
-    todo: {
-      type: 'string'
-    },
-    userId: {
-      type: 'number'
-    }
-  },
-  required: ['id', 'completed', 'todo', 'userId'],
-  additionalProperties: false
-}
-
 describe('Todo', () => {
   it('Should return a todo', async () => {
     const response = await TodoService.get(1)
@@ -46,13 +26,13 @@ describe('Todo', () => {
   it('Should return a random todo', async () => {
     const response1 = await TodoService.getRandom()
 
-    const validate1 = ajv.validate(todoSchema, response1.data)
+    const validate1 = ajv.validate(TodoSchema, response1.data)
     expect(response1.status).toBe(200)
     expect(validate1).toBe(true)
 
     const response2 = await TodoService.getRandom()
 
-    const validate2 = ajv.validate(todoSchema, response2.data)
+    const validate2 = ajv.validate(TodoSchema, response2.data)
     expect(response2.status).toBe(200)
     expect(validate2).toBe(true)
 
