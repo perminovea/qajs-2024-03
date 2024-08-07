@@ -6,11 +6,11 @@ const config = _config.dummyjson
 describe('Auth', () => {
   it('Success login', async () => {
     const response = await AuthDummyjsonService.login({
-      username: 'wrong_username', // config.username,
+      username: config.username,
       password: config.password,
     })
 
-    expect(response.status).toEqual(200)
+    expect(response.status).toEqual(201)
     expect(response.data.username).toBe(config.username)
     expect(response.data.token).toBeTruthy()
   })
