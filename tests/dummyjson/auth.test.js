@@ -6,7 +6,7 @@ const config = _config.dummyjson
 describe('Auth', () => {
   it('Success login', async () => {
     const response = await AuthDummyjsonService.login({
-      username: config.username,
+      username: 'wrong_username', // config.username,
       password: config.password,
     })
 
