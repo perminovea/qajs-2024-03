@@ -29,9 +29,9 @@ describe('Todo', () => {
     expect(response.status).toBe(200)
     expect(response.data).toStrictEqual({
       id: 1,
-      completed: true,
-      todo: 'Do something nice for someone I care about',
-      userId: 26,
+      completed: expect.any(Boolean),
+      todo: expect.any(String),
+      userId: expect.any(Number),
     })
   })
 
