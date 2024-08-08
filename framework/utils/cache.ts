@@ -1,6 +1,8 @@
 export const cached =
-  (fn, cache = new Map()) =>
-  async (...payload) => {
+// eslint-disable-next-line
+  (fn: Function, cache: Map<string, any> = new Map()) =>
+  // eslint-disable-next-line
+  async (...payload: any[]) => {
     const cacheKey = JSON.stringify(payload)
 
     if (!cache.has(cacheKey)) {

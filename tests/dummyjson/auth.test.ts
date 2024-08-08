@@ -21,9 +21,19 @@ describe('Auth', () => {
         username: config.username,
         password: 'wrongpassword',
       })
-    } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
       expect(error.response.statusCode).toEqual(400)
       expect(error.response.body.message).toBe('Invalid credentials')
     }
   })
 })
+
+// type User = {
+//   id: number;
+// }
+// // eslint-disable-next-line @typescript-eslint/no-explicit-any
+// const user: any = { id: 10 }
+//
+// // console.log((user as User).id)
+// console.log(user.id)

@@ -11,6 +11,7 @@
     "lint": "eslint . --fix",
     "codestyle:ci": "run-p lint:ci format:ci",
     "codestyle": "run-s lint format",
+    "type-check": "tsc --noEmit",
     "build": "babel src --out-dir build --source-maps inline",
     "test": "jest --verbose --runInBand --setupFiles dotenv/config",
     "coverage": "jest --coverage --runInBand",
@@ -53,6 +54,7 @@
     "typescript": "^5.5.4"
   },
   "dependencies": {
+    "@types/supertest": "^6.0.2",
     "ajv": "^8.13.0",
     "jest-json-schema": "^6.1.0"
   }

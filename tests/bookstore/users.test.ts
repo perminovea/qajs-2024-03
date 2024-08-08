@@ -1,9 +1,10 @@
 import { AuthService, UserService, UserFixture } from '../../framework'
+import type { User } from '../../framework/fixtures/userFixture'
 
 describe('Users', () => {
-  let token
-  let userId
-  let newUser
+  let token: string
+  let userId: string;
+  let newUser: User
 
   beforeAll(async () => {
     newUser = UserFixture.generateUserCredentials()

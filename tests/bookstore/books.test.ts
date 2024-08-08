@@ -12,7 +12,7 @@ describe('Books', () => {
   const [book1, book2] = books
   const isbn = book1.isbn
 
-  let token
+  let token: string;
 
   beforeAll(async () => {
     token = await AuthService.getTokenFromCache({
@@ -30,13 +30,13 @@ describe('Books', () => {
 
   it('Удаление всех книг из коллекции пользователя', async () => {
     const responseRemoveAll = await UserBookService.removeAll({
-      userId,
+      userId: userId!,
       token,
     })
     expect(responseRemoveAll.status).toBe(204)
 
     const responseUser = await UserService.get({
-      userId,
+      userId: userId!,
       token,
     })
     expect(responseUser.data.books).toEqual([])
@@ -44,7 +44,7 @@ describe('Books', () => {
 
   it('Добавление книги в коллекцию к пользователю', async () => {
     const responseAddListOfBooks = await UserBookService.addList({
-      userId,
+      userId: userId!,
       isbns: [isbn],
       token,
     })
@@ -54,7 +54,7 @@ describe('Books', () => {
 
   it('Заменить книгу в коллекции пользователя', async () => {
     const responseAddBook = await UserBookService.replace({
-      userId,
+      userId: userId!,
       fromIsbn: isbn,
       toIsbn: book2.isbn,
       token,
