@@ -1,7 +1,13 @@
 import config from '../config/configBookstore'
 import { cached } from '../utils/cache'
 
-const generateToken = async ({ userName, password }) => {
+const generateToken = async ({
+  userName,
+  password,
+}: {
+  userName: string
+  password: string
+}) => {
   const response = await fetch(`${config.baseURL}/Account/v1/GenerateToken`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

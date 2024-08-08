@@ -1,6 +1,6 @@
 const baseUrl = 'https://reqres.in/api'
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line  @typescript-eslint/no-unused-vars
 async function fetchUsers(queryParams = {}) {
   const response = await fetch(
     `${baseUrl}/users?${new URLSearchParams(queryParams)}`,
@@ -12,7 +12,7 @@ async function fetchUsers(queryParams = {}) {
   }
 }
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line  @typescript-eslint/no-unused-vars
 async function fetchUser(id) {
   const response = await fetch(`${baseUrl}/users/${id}`)
   return {
@@ -22,7 +22,7 @@ async function fetchUser(id) {
   }
 }
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line  @typescript-eslint/no-unused-vars
 async function updateUser(id, data) {
   const response = await fetch(`${baseUrl}/users/${id}`, {
     method: 'PATCH',
@@ -38,7 +38,7 @@ async function updateUser(id, data) {
   }
 }
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line  @typescript-eslint/no-unused-vars
 async function putUser(id, data) {
   const response = await fetch(`${baseUrl}/users/${id}`, {
     method: 'PUT',
@@ -54,7 +54,7 @@ async function putUser(id, data) {
   }
 }
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line  @typescript-eslint/no-unused-vars
 async function deleteUser(id) {
   const response = await fetch(`${baseUrl}/users/${id}`, {
     method: 'DELETE',
@@ -65,7 +65,7 @@ async function deleteUser(id) {
   }
 }
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line  @typescript-eslint/no-unused-vars
 async function createUser(data) {
   const response = await fetch(`${baseUrl}/users`, {
     method: 'POST',
