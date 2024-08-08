@@ -1,3 +1,4 @@
+// @ts-expect-error FIXME
 import got from 'got'
 import config from '../config/configDummyjson'
 
@@ -10,7 +11,12 @@ import config from '../config/configDummyjson'
  * DOC: https://jestjs.io/docs/configuration#transformignorepatterns-arraystring
  */
 
-const login = async ({ username, password, expiresInMins }) => {
+interface LoginPayload {
+  username: string
+  password: string
+  expiresInMins?: number
+}
+const login = async ({ username, password, expiresInMins }: LoginPayload) => {
   const response = await got.post(`${config.baseURL}/auth/login`, {
     json: {
       username,
